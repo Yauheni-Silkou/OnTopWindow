@@ -1,0 +1,47 @@
+﻿<Window x:Class="OnTopWindow.VisualWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnTopWindow"
+        mc:Ignorable="d"
+        Title="VisualWindow"
+        WindowStyle="None"
+        Topmost="True"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Deactivated="Window_Deactivated">
+    <Window.DataContext>
+        <local:VisualViewModel/>
+    </Window.DataContext>
+    <Grid Name="visual_Grid" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#80171717">
+        <Grid Margin="20" Name="textbox_Grid" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Arial Black"/>
+                    <Setter Property="FontSize" Value="40"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </Grid.Resources>
+            <TextBlock Name="textblock_time" Visibility="Collapsed"/>
+            <TextBlock Name="textblock_timer" Visibility="Collapsed"/>
+            <TextBlock Name="textblock_stopwatch" Visibility="Collapsed"/>
+            <TextBlock Name="textblock_message" Visibility="Collapsed" FontSize="25"/>
+            <Image Name="image" Visibility="Collapsed"/>
+            <Grid Name="browserGrid" Visibility="Collapsed">
+                <Grid x:Name="prGrid"/>
+                <Grid Width="0" Height="0">
+                    <ComboBox Name="programComboBox"
+                              ItemsSource="{Binding AvailableWindows}"
+                              SelectedValue="{Binding SelectedWindow, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Key"/>
+                </Grid>
+            </Grid>
+            <Grid Name="videoplayerGrid" Visibility="Collapsed" Width="480" Height="270">
+                <MediaElement Source="" LoadedBehavior="Manual" Name="mePlayer" ScrubbingEnabled="True"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
